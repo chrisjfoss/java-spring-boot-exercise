@@ -1,21 +1,24 @@
-# Developer Excercise
-The purpose of this exercise is to give you and us an idea of what its like working through a problem with you. We like to work collaboratively, so this is really just another way to get to know you.
+# Instructions
+You will need to make sure you have [Maven](https://maven.apache.org/guides/index.html) installed on your machine and a [PostgreSQL](https://www.postgresql.org/) server running.
 
-## Instructions
-In this exercise there is a base Java Spring Boot project and a data file titled Course-Data.csv. We would like for you to create a database, populate it with the data in the csv file and then create an API endpoint to return course data in json format. The endpoint should accept two parameters, course code prefix and course code number, both being optional.  
+Once you have cloned the repository, copy the contents of the application.template.properties file into a new file named application.properties. 
 
-## Additional Resources
+You will need to provide the url to the database, as well as the username and password for a user with read and write privileges on the table that the application accesses.
 
-### Reference Documentation
-For further reference, please consider the following sections:
+    spring.datasource.url=spring.datasource.url=jdbc:postgresql://localhost:5432/your_database_name
+    spring.datasource.username=your_username
+    spring.datasource.password=your_password
+    
+## Running the Application
+Once you have everything set up, navigate in the command prompt to the root folder of the project and run: 
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/maven-plugin/)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/htmlsingle/#using-boot-devtools)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.2.6.RELEASE/reference/htmlsingle/#boot-features-jpa-and-spring-data)
+    mvnw spring-boot:run
 
-### Guides
-The following guides illustrate how to use some features concretely:
+The application should download its dependencies and start up the server. 
 
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+The endpoint is /getCourses, and the parameters accepted are code and prefix. 
 
+Here is an example request and response from the command prompt:
+
+    curl "localhost:8080/getCourses?code=404&prefix=ENG"
+    [{"advisingRequisiteCode":"ENG404","coreLiteratureRequirement":"NULL","catalogText":"Studies how English has evolved, from Indo-European ancestor, through Old and Middle English to present. Texts from different periods read, looking at how grammar, vocabulary and pronunciation have changed. Possible scenarios for future of languate discussed.","code":"ENG  404                      ","codeNumber":404,"prefix":"ENG","codeSanitized":"ENG-404","fees":"0","title":"HISTORY OF THE ENGLISH LANGUAGE","defaultCreditHours":"4","divisionCode":"UG","feeType":"NULL","fixedVariableCredit":"F","maxCreditHours":4,"minCreditHours":4}]
